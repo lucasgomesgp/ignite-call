@@ -26,6 +26,7 @@
     "@eslint/eslintrc": "^3",
     "@rocketseat/eslint-config": "^2.2.2",
     "@types/cookie": "^0.6.0",
+    "@types/next-auth": "^3.13.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
