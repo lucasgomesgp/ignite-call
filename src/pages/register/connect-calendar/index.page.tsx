@@ -1,12 +1,12 @@
-import { Button, Heading, MultiStep, Text } from '@ignite-ui/react'
+import { ArrowRight, Check } from 'phosphor-react'
 import { AuthError, ConnectBox, ConnectItem } from './styles'
+import { Button, Heading, MultiStep, Text } from '@ignite-ui/react'
 import { Container, Header } from '../styles'
 import { signIn, useSession } from 'next-auth/react'
 
-import { ArrowRight, Check } from 'phosphor-react'
 import { useRouter } from 'next/router'
 
-export default function ConnectCalendar() {
+export default function Register() {
   const session = useSession()
   const router = useRouter()
 
@@ -46,7 +46,7 @@ export default function ConnectCalendar() {
           )}
         </ConnectItem>
         {hasAuthError && (
-          <AuthError>
+          <AuthError size="sm">
             Falha ao se conectar ao Google, verifique se você habilitou as
             permissões de acesso do Google Calendar.
           </AuthError>
