@@ -25,6 +25,8 @@ const timeIntervalsFormSchema = z.object({
 });
 type TimeIntervalsFormData = z.infer<typeof timeIntervalsFormSchema>;
 
+
+
 export default function TimeIntervals() {
     const { register, handleSubmit, control, formState: { isSubmitting, errors }, watch } = useForm({
         resolver: zodResolver(timeIntervalsFormSchema),
@@ -68,26 +70,27 @@ export default function TimeIntervals() {
                                     <Controller name={`intervals.${index}.enabled`} control={control} render={({ field }) => {
                                         return (
                                             <Checkbox
-                                                onCheckedChange={(checked) => {
+                                                checked={field.value}
+                                                onCheckedChange={(checked: boolean | 'indeterminate') => {
                                                     field.onChange(checked === true)
                                                 }}
-                                                checked={field.value}
                                             />
+
                                         )
                                     }}
                                     />
                                     <Text>{weekDays[field.weekDay]}</Text>
                                 </IntervalDay>
                                 <IntervalInputs>
-                                    <TextInput size="sm" type="time" step={60} disabled={intervals[index].enabled === false} {...register(`intervals.${index}.startTime`)} />
-                                    <TextInput size="sm" type="time" step={60} disabled={intervals[index].enabled === false} {...register(`intervals.${index}.endTime`)} />
+                                    <TextInput size="sm" type="time" step={60} disabled={intervals[index].enabled === false} {...register(`intervals.${index}.startTime`) as any} />
+                                    <TextInput size="sm" type="time" step={60} disabled={intervals[index].enabled === false} {...register(`intervals.${index}.endTime`) as any} />
                                 </IntervalInputs>
                             </IntervalItem>
                         )
                     })}
                 </IntervalsContainer>
-                {errors.intervals && (
-                    <FormError size="sm">{errors.intervals.message}</FormError>
+                {errors.intervals?.root && (
+                    <FormError size="sm">{errors.intervals.root.message}</FormError>
                 )}
                 <Button type="submit" disabled={isSubmitting}>
                     Próximo passo
